@@ -41,7 +41,7 @@ module OmniAuth
           :first_name => raw_info['name']['givenName'],
           :last_name  => raw_info['name']['familyName'],
           :image      => raw_info['image']['url'],
-          :location => raw_info['placesLived'].select { |place| place.primary? }.first,
+          :location => raw_info['placesLived'].select { |place| place.has_key?('primary') }.first,
           :description=> raw_info['aboutMe'],
           :urls => {
             'Google' => raw_info['link']
