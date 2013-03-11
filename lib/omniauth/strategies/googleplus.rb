@@ -36,10 +36,10 @@ module OmniAuth
 
       info do
         prune!({
-          :name       => [raw_info['name']['given_name'], raw_info['name']['family_name']].join(' '),
+          :name       => [raw_info['name']['givenName'], raw_info['name']['familyName']].join(' '),
           :email      => verified_email,
-          :first_name => raw_info['name']['given_name'],
-          :last_name  => raw_info['name']['family_name'],
+          :first_name => raw_info['name']['givenName'],
+          :last_name  => raw_info['name']['familyName'],
           :image      => raw_info['image']['url'],
           :urls => {
             'Google' => raw_info['link']
