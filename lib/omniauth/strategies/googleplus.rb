@@ -2,7 +2,7 @@ require 'omniauth/strategies/oauth2'
 
 module OmniAuth
   module Strategies
-    class GoogleOauth2 < OmniAuth::Strategies::OAuth2
+    class GooglePlus < OmniAuth::Strategies::OAuth2
 
       # Possible scopes: userinfo.email,userinfo.profile,plus.me
       DEFAULT_SCOPE = "userinfo.email,userinfo.profile"
