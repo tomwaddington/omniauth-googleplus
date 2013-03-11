@@ -53,9 +53,13 @@ module OmniAuth
         prune! hash
       end
 
+      def email_info
+        @email_info ||= access_token.get('https://www.googleapis.com/oauth2/v1/tokeninfo').parsed
+        
+      end
+
       def raw_info
         #GET https://www.googleapis.com/plus/v1/people/userId
-        
         @raw_info ||= access_token.get('https://www.googleapis.com/plus/v1/people/me').parsed
       end
 
@@ -69,7 +73,7 @@ module OmniAuth
       end
 
       def verified_email
-        raw_info['verified_email'] ? raw_info['email'] : nil
+        email_info['verified_email'] ? email_info['email'] : nil
       end
 
     end
