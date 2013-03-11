@@ -36,11 +36,13 @@ module OmniAuth
 
       info do
         prune!({
-          :name       => [raw_info['name']['givenName'], raw_info['name']['familyName']].join(' '),
+          :name       => raw_info['displayName'],
           :email      => verified_email,
           :first_name => raw_info['name']['givenName'],
           :last_name  => raw_info['name']['familyName'],
           :image      => raw_info['image']['url'],
+          :location => raw_info['placesLived'].select { |place| place.primary? }.first
+          :description=> raw_info['aboutMe']
           :urls => {
             'Google' => raw_info['link']
           }
