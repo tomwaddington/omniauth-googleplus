@@ -54,7 +54,7 @@ module OmniAuth
       end
 
       def email_info
-        @email_info ||= access_token.get('https://www.googleapis.com/oauth2/v1/tokeninfo').parsed
+        @email_info ||= access_token.get('https://www.googleapis.com/oauth2/v1/userinfo').parsed
         
       end
 
