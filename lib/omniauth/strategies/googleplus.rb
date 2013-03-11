@@ -20,7 +20,7 @@ module OmniAuth
           %w(scope approval_prompt access_type state hd user_id request_visible_actions).each do |k|
             params[k.to_sym] = request.params[k] unless [nil, ''].include?(request.params[k])
           end
-          params[:scope] = "https://www.googleapis.com/auth/plus.login"
+          params[:scope] = "https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/userinfo.email"
           # Override the state per request
           session['omniauth.state'] = params[:state] if request.params['state']
         end
@@ -30,11 +30,11 @@ module OmniAuth
 
       info do
         prune!({
-          :name       => raw_info['name'],
+          :name       => [raw_info['name']['given_name'], raw_info['name']['family_name']].join(' '),
           :email      => verified_email,
           :first_name => raw_info['name']['given_name'],
           :last_name  => raw_info['name']['family_name'],
-          :image      => raw_info['picture'],
+          :image      => raw_info['image']['url'],
           :urls => {
             'Google' => raw_info['link']
           }
