@@ -3,7 +3,8 @@ require 'omniauth/strategies/oauth2'
 module OmniAuth
   module Strategies
     class GooglePlus < OmniAuth::Strategies::OAuth2
-
+      DEFAULT_SCOPE = "userinfo.email,plus.login"
+      
 
       option :name, 'googleplus'
       option :authorize_options, [:scope, :approval_prompt, :access_type, :state, :hd]
@@ -15,12 +16,17 @@ module OmniAuth
       }
 
       def authorize_params
+        base_scope_url = "https://www.googleapis.com/auth/"
+        
         super.tap do |params|
           # Read the params if passed directly to omniauth_authorize_path
           %w(scope approval_prompt access_type state hd user_id request_visible_actions).each do |k|
             params[k.to_sym] = request.params[k] unless [nil, ''].include?(request.params[k])
           end
-          params[:scope] = "https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/userinfo.email"
+          scopes = (params[:scope] || DEFAULT_SCOPE).split(",")
+          scopes.map! { |s| s =~ /^https?:\/\// ? s : "#{base_scope_url}#{s}" }
+          params[:scope] = scopes.join(' ')
+
           # Override the state per request
           session['omniauth.state'] = params[:state] if request.params['state']
         end
