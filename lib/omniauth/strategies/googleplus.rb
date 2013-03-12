@@ -41,7 +41,7 @@ module OmniAuth
           :first_name => raw_info['name']['givenName'],
           :last_name  => raw_info['name']['familyName'],
           :image      => raw_info['image']['url'],
-          :location => raw_info['placesLived'].select { |place| place.has_key?('primary') }.first,
+          :location => location,
           :description=> raw_info['aboutMe'],
           :urls => {
             'Google' => raw_info['link']
@@ -57,7 +57,10 @@ module OmniAuth
 
       def email_info
         @email_info ||= access_token.get('https://www.googleapis.com/oauth2/v1/userinfo').parsed
-        
+      end
+      
+      def location
+        raw_info['currentLocation'] || raw_info['placesLived'].select { |place| place.has_key?('primary') }.first.value
       end
 
       def raw_info
