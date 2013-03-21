@@ -5,16 +5,16 @@ require 'omniauth/googleplus/version'
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-googleplus"
   spec.version       = OmniAuth::GooglePlus::VERSION
-  spec.authors       = ["Tom Waddington", "Kurtis Rainbolt-Greene", "Sam Dunne"]
+  spec.authors       = ["Tom Waddington"]
   spec.email         = ["tom@waddington.me"]
-  spec.summary       = %q{A Google+ OAuth2 solution for Omniauth}
+  spec.summary       = %q{A Google+ Sign In OAuth2 strategy for Omniauth}
   spec.description   = spec.summary
   spec.homepage      = "http://www.github.com/tomwaddington/omniauth-googleplus"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files    = [] #spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "omniauth-oauth2", '~> 1.1'

@@ -60,7 +60,7 @@ module OmniAuth
       end
       
       def location
-        raw_info['currentLocation'] || raw_info['placesLived'].select { |place| place.has_key?('primary') }.first['value']
+        raw_info['currentLocation'] || raw_info['placesLived'].select { |place| place.has_key?('primary') }.first['value'] rescue nil
       end
 
       def raw_info
