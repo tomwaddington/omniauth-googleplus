@@ -3,10 +3,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'omniauth/googleplus/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "omniauth-googleplus"
+  spec.name          = "omniauth-gplus-signin"
   spec.version       = OmniAuth::GooglePlus::VERSION
   spec.authors       = ["Tom Waddington"]
-  spec.email         = ["tom@waddington.me"]
+  spec.email         = ["tom@tomwaddington.co.uk"]
   spec.summary       = %q{A Google+ Sign In OAuth2 strategy for Omniauth}
   spec.description   = spec.summary
   spec.homepage      = "http://www.github.com/tomwaddington/omniauth-googleplus"

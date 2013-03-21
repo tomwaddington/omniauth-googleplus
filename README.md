@@ -1,4 +1,4 @@
-omniauth-googleplus
+omniauth-gplus-signin
 =========
 
 A simple strategy for Omniauth to use Sign In With Google+
