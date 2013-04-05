@@ -42,7 +42,7 @@ module OmniAuth
           :last_name  => raw_info['name']['familyName'],
           :image      => raw_info['image']['url'],
           :location => location,
-          :description=> CGI::unescapeHTML(raw_info['aboutMe']),
+          :description=> about_me,
           :urls => {
             'Google' => raw_info['link']
           }
@@ -61,6 +61,10 @@ module OmniAuth
       
       def location
         raw_info['currentLocation'] || raw_info['placesLived'].select { |place| place.has_key?('primary') }.first['value'] rescue nil
+      end
+      
+      def about_me
+        CGI::unescapeHTML(raw_info['aboutMe'] || "")
       end
 
       def raw_info
